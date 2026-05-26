@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+    background: #0b1220;
+    color: white;
+    display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background: #111827;
+    padding: 20px;
+    position: fixed;
+    overflow-y: auto;
+    border-right: 1px solid #1f2937;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+    color: #38bdf8;
+}
+
+.sidebar a {
+    display: block;
+    color: #d1d5db;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background: #1f2937;
+    color: white;
+}
+
+/* LOGO */
+.logo {
+    width: 140px;
+    display: block;
+    margin: 0 auto 20px auto;
+}
+
+/* CONTENT */
+.content {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    padding: 40px;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg,#111827,#0f172a);
+    padding: 40px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    border: 1px solid #1f2937;
+}
+
+.hero h1 {
+    margin-bottom: 10px;
+}
+
+/* SEARCH */
+#searchInput {
+    width: 100%;
+    padding: 15px;
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* CARDS */
+.card {
+    background: #111827;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #1f2937;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    color: #38bdf8;
+}
+
+.card p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #d1d5db;
+}
+
+/* IMAGE */
+.uniform {
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 15px;
+    border: 1px solid #1f2937;
+}
+
+/* MOBILE */
+@media(max-width: 900px) {
+
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+}

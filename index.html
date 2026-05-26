@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LSMD • Prakti/Sani Regelwerk</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+    <img src="assets/md-logo.png" class="logo">
+
+    <h2>LSMD</h2>
+
+    <a href="#allgemein">🛡 Allgemeine Regeln</a>
+    <a href="#kommunikation">🔄 Kommunikation</a>
+    <a href="#pruefung">📋 Prüfungen</a>
+    <a href="#dokumente">🗂 Dokumentation</a>
+    <a href="#motivation">💬 Motivation</a>
+    <a href="#kleidung">👕 Dienstkleidung</a>
+
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+    <!-- HEADER -->
+    <div class="hero">
+
+        <h1>📘 Regelwerk Prakti/Sani-Ausbilder – LSMD</h1>
+
+        <p>
+            Dieses Regelwerk dient der Sicherstellung von Qualität,
+            Struktur und Professionalität innerhalb der Prakti/Sani Abteilung.
+        </p>
+
+    </div>
+
+    <!-- SEARCH -->
+    <input type="text" id="searchInput"
+    placeholder="🔍 Regelwerk durchsuchen...">
+
+    <!-- SECTION -->
+    <section id="allgemein" class="card">
+
+        <h2>🛡 Allgemeine Regeln</h2>
+
+        <p><b>§1 – Vorbildfunktion</b><br>
+        Alle Ausbilder repräsentieren das LSMD professionell.</p>
+
+        <p><b>§2 – Fachliche Kompetenz</b><br>
+        Alle Vorschriften müssen bekannt sein.</p>
+
+        <p><b>§3 – Teamarbeit</b><br>
+        Zusammenarbeit ist verpflichtend.</p>
+
+        <p><b>§4 – Dienstkleidung</b><br>
+        Die offizielle Kleidung ist verpflichtend.</p>
+
+        <p><b>§5 – Besprechungen</b><br>
+        Discord Meetings sind verpflichtend.</p>
+
+    </section>
+
+    <!-- SECTION -->
+    <section id="kommunikation" class="card">
+
+        <h2>🔄 Kommunikation</h2>
+
+        <p>
+            Aufgaben müssen abgesprochen werden.
+            Eigenmächtige Entscheidungen vermeiden.
+        </p>
+
+    </section>
+
+    <!-- SECTION -->
+    <section id="pruefung" class="card">
+
+        <h2>📋 Prüfungen & Einstellungen</h2>
+
+        <p>
+            Prüfungen finden im Staff Room oder Discord statt.
+        </p>
+
+        <p>
+            Planung erfolgt frühzeitig.
+        </p>
+
+    </section>
+
+    <!-- SECTION -->
+    <section id="dokumente" class="card">
+
+        <h2>🗂 Dokumentation</h2>
+
+        <p>
+            Dokumente sind vertraulich.
+        </p>
+
+    </section>
+
+    <!-- SECTION -->
+    <section id="motivation" class="card">
+
+        <h2>💬 Motivation & Struktur</h2>
+
+        <p>
+            Neue Mitglieder aktiv fördern und motivieren.
+        </p>
+
+    </section>
+
+    <!-- SECTION -->
+    <section id="kleidung" class="card">
+
+        <h2>👕 Dienstkleidung</h2>
+
+        <p>
+            Offizielle Dienstkleidung:
+        </p>
+
+        <img src="assets/dienstkleidung.png" class="uniform">
+
+    </section>
+
+</div>
+
+<script>
+
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("keyup", function() {
+
+    const filter = searchInput.value.toLowerCase();
+
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+
+        const text = card.innerText.toLowerCase();
+
+        if(text.includes(filter)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LSMD • Regelwerk System</title>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0b1220;
+color:white;
+}
+
+header{
+padding:25px;
+text-align:center;
+background:#111827;
+border-bottom:1px solid #1f2937;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.rule{
+background:#111827;
+padding:15px;
+margin-bottom:10px;
+border-radius:10px;
+border-left:3px solid #38bdf8;
+}
+
+.rule[contenteditable="true"]{
+outline:2px dashed #38bdf8;
+}
+
+button{
+padding:10px 15px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+}
+
+.save{
+background:#22c55e;
+color:white;
+}
+
+.add{
+background:#3b82f6;
+color:white;
+}
+
+.delete{
+background:#ef4444;
+color:white;
+}
+
+small{
+opacity:0.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>📘 LSMD Regelwerk System</h1>
+<small>Owner / Editor System • Firebase Save • Live Edit</small>
+</header>
+
+<div class="container">
+
+<div id="auth">
+<h3>🔐 Login</h3>
+<input id="discordId" placeholder="Deine Discord ID">
+<button onclick="login()">Login</button>
+</div>
+
+<div id="panel" style="display:none;">
+
+<h3>🛡 Regeln</h3>
+
+<div id="rules"></div>
+
+<button class="add" onclick="addRule()">+ Regel hinzufügen</button>
+<button class="save" onclick="saveRules()">💾 Speichern</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* 🔥 FIREBASE CONFIG (HIER EINTRAGEN) */
+const firebaseConfig = {
+apiKey: "XXX",
+authDomain: "XXX",
+projectId: "XXX",
+storageBucket: "XXX",
+messagingSenderId: "XXX",
+appId: "XXX"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+/* 👑 OWNER + EDITOR IDS */
+const owners = ["DEINE_DISCORD_ID"];
+const editors = ["ID1","ID2"];
+
+/* STATE */
+let userId = "";
+let canEdit = false;
+
+/* LOGIN */
+function login(){
+userId = document.getElementById("discordId").value;
+
+if(owners.includes(userId)){
+canEdit = true;
+alert("Owner Zugriff erlaubt");
+start();
+return;
+}
+
+if(editors.includes(userId)){
+canEdit = true;
+alert("Editor Zugriff erlaubt");
+start();
+return;
+}
+
+alert("Kein Zugriff");
+}
+
+/* START */
+function start(){
+document.getElementById("auth").style.display="none";
+document.getElementById("panel").style.display="block";
+loadRules();
+}
+
+/* LOAD */
+async function loadRules(){
+const snap = await db.collection("rules").get();
+
+let html = "";
+
+snap.forEach(doc=>{
+html += `
+<div class="rule" contenteditable="${canEdit}" data-id="${doc.id}">
+${doc.data().text}
+</div>
+`;
+});
+
+document.getElementById("rules").innerHTML = html;
+}
+
+/* ADD RULE */
+function addRule(){
+document.getElementById("rules").innerHTML += `
+<div class="rule" contenteditable="true">
+Neue Regel...
+</div>
+`;
+}
+
+/* SAVE */
+async function saveRules(){
+
+const rules = document.querySelectorAll(".rule");
+
+rules.forEach(async r=>{
+let id = r.getAttribute("data-id");
+
+let text = r.innerText;
+
+if(id){
+await db.collection("rules").doc(id).set({text});
+}else{
+await db.collection("rules").add({text});
+}
+});
+
+alert("Gespeichert!");
+loadRules();
+}
+
+</script>
+
+</body>
+</html>
